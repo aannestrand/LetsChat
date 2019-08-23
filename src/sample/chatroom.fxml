@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.ChatroomController"
+            prefHeight="400.0" prefWidth="600.0">
+    <StackPane layoutX="1.0" layoutY="1.0" prefHeight="720.0" prefWidth="600.0">
+        <children>
+            <BorderPane fx:id="mainPane" prefHeight="200.0" prefWidth="200.0">
+                <top>
+                    <HBox alignment="CENTER" maxHeight="75.0" maxWidth="600.0" prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                        <children>
+                            <Label fx:id="groupNameLabel" text="Group Name here">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                            </Label>
+                        </children></HBox>
+                </top>
+                <bottom>
+                    <HBox alignment="CENTER" maxHeight="100.0" maxWidth="600.0" prefHeight="100.0" prefWidth="600.0" spacing="30.0" BorderPane.alignment="CENTER">
+                        <children>
+                            <TextField fx:id="inputTextField" alignment="TOP_LEFT" maxHeight="70.0" maxWidth="460.0" prefHeight="70.0" prefWidth="460.0" promptText="Enter message here..." style="-fx-background-color: white;" />
+                            <Button fx:id="sendButton" alignment="CENTER" mnemonicParsing="false" onAction="#sentMessage" onMouseEntered="#mouseHoverButtons" onMouseExited="#mouseExitHoverButtons" style="-fx-background-color: transparent;" text="Send" />
+                        </children></HBox>
+                </bottom>
+                <center>
+                    <TextArea fx:id="historyTextArea" maxHeight="530.0" maxWidth="560.0" prefHeight="530.0" prefWidth="560.0" wrapText="true" BorderPane.alignment="CENTER">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </TextArea>
+                </center>
+            </BorderPane>
+        </children>
+    </StackPane>
+
+</AnchorPane>

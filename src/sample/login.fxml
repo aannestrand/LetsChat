@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.82" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #c5e0d1;" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="TOP_CENTER" prefHeight="49.0" prefWidth="372.0" text="Welcome to Chatty!">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="1.0" />
+         </opaqueInsets>
+      </HBox>
+      <TextField fx:id="tfUserName" layoutX="217.0" layoutY="276.0" promptText="Enter username" />
+      <Label layoutX="137.0" layoutY="281.0" text="Username" />
+      <Label layoutX="138.0" layoutY="337.0" text="Password" />
+      <Button fx:id="loginBtn" layoutX="245.0" layoutY="399.0" mnemonicParsing="false" text="Start Chatting!" />
+      <Label layoutX="262.0" layoutY="223.0" text="Log-In">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="signUpLink" layoutX="239.0" layoutY="364.0" text="Need an account?" />
+      <PasswordField fx:id="tfPassword" layoutX="216.0" layoutY="332.0" promptText="Enter password" />
+      <Button fx:id="exitButton" layoutX="271.0" layoutY="634.0" mnemonicParsing="false" onAction="#endProgram" text="Exit" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>
