@@ -1,5 +1,7 @@
 package sample;
 
+import org.bson.Document;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -81,11 +83,19 @@ public class ClientHandler implements Runnable, Serializable {
 
                     //if it's a user verification request
                     else if (message instanceof VerifyUserRequest) {
-                        User u = ((VerifyUserRequest) message).getUser();
-                        if (ServerMain.registeredUsers.containsKey(u.getUserName()) && ServerMain.registeredUsers.get(u.getUserName()).getPassword().equals(u.getPassword())) {
-                            ((VerifyUserRequest) message).setVerified(true);
+
+                        Document found = (Document) ServerMain.userCollection.find(new Document("userID",((VerifyUserRequest)message).getUser().getUserName())).first();
+                        if (found != null) {
+                            System.out.println("User found");
+
+                            if (found.get("password").equals(((VerifyUserRequest) message).getUser().getPassword())) {
+                                System.out.println("password correct");
+                                ((VerifyUserRequest) message).setVerified(true);
+                            }
                         }
+
                         output.writeObject(message);
+
                     }
 
                     // finally, if the client is sending a message...
@@ -99,6 +109,16 @@ public class ClientHandler implements Runnable, Serializable {
                                 System.out.println("Notifying observers of: " + ((Message) message).getMessage());
                             }
                         }
+                    }
+
+                    // new user request
+                    else if (message instanceof NewUserRequest) {
+
+                        Document document = new Document("userID",((NewUserRequest) message).getUser().getUserName());
+                        document.append("password",((NewUserRequest) message).getUser().getPassword());
+
+                        ServerMain.userCollection.insertOne(document);
+
                     }
 
                     else if (message instanceof LogoutRequest) {

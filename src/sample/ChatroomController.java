@@ -30,6 +30,7 @@ public class ChatroomController {
     public void startUp(ClientMain currentClient, ChatRoom room) {
         this.currentClient = currentClient;
         this.chatRoom = room;
+        groupNameLabel.setText(room.getRoomName());
     }
 
     public ChatRoom getChatRoom() {

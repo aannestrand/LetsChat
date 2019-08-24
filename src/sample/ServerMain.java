@@ -13,6 +13,11 @@ ata758
 
 package sample;
 
+import com.mongodb.*;
+import com.mongodb.MongoClient;
+import com.mongodb.client.*;
+import org.bson.Document;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,6 +31,7 @@ public class ServerMain {
     public static HashMap<String, User> registeredUsers = new HashMap<>();
     public static HashMap<String, ClientHandler> onlineClients = new HashMap<>();
     public static List<ChatRoomObserverable> rooms = new ArrayList<ChatRoomObserverable>();
+    public static MongoCollection userCollection;
 
     public static void main(String[] args) {
         try {
@@ -45,15 +51,29 @@ public class ServerMain {
         registeredUsers.put("andrew2", new User("andrew2", "andrew2"));
         registeredUsers.put("andrew3", new User("andrew3", "andrew3"));
         registeredUsers.put("andrew4", new User("andrew4", "andrew4"));
-
     }
 
     public void setUpNetwork() throws IOException {
         ServerSocket servSock = new ServerSocket(9999);
         System.out.println(InetAddress.getLocalHost());
 
+        // create universal broadcast channel
         ChatRoomObserverable broadcast = new ChatRoomObserverable(new ChatRoom(null,"broadcast"));
         rooms.add(broadcast);
+
+        // connect to MongoDB
+        String uri = "mongodb+srv://aannestrand:Amber101@letschat-g6ryf.mongodb.net/test";
+        MongoClientURI clientURI = new MongoClientURI(uri);
+        MongoClient mongoClient = new MongoClient(clientURI);
+
+        MongoDatabase mongoDatabase = mongoClient.getDatabase("LetsChat");
+        MongoCollection collection = mongoDatabase.getCollection("users");
+        userCollection = collection;
+
+//        Document document = new Document("userID","andrew3");
+//        document.append("password","andrew3");
+//
+//        userCollection.insertOne(document);
 
         while(true) {
             Socket clientSocket = servSock.accept();
